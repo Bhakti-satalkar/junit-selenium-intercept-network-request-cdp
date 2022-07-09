@@ -102,6 +102,26 @@ DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability("name", "Selenium 4 Test");
         capabilities.setCapability("plugin", "git-junit");
 ```
+    ```
+### Intercept network requests
+
+The following code can be used to intercept network requests:
+```java
+DevTools devTools = ((HasDevTools) driver).getDevTools();
+devTools.createSession();
+
+Supplier<InputStream> message = () -> new ByteArrayInputStream(
+   "Creamy, delicious cheese!".getBytes(StandardCharsets.UTF_8));
+
+NetworkInterceptor interceptor = new NetworkInterceptor(
+   driver,
+   Route.matching(req -> true)
+   .to(() -> req -> new HttpResponse()
+   .setStatus(200)
+   .addHeader("Content-Type", StandardCharsets.UTF_8.toString())
+   .setContent(message)));
+```                               
+
 
 ### Executing the Test
 
