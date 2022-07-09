@@ -102,7 +102,6 @@ DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability("name", "Selenium 4 Test");
         capabilities.setCapability("plugin", "git-junit");
 ```
-    ```
 ### Intercept network requests
 
 The following code can be used to intercept network requests:
